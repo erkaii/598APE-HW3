@@ -44,3 +44,7 @@ Total time to run simulation 11.407342 seconds, final location 4221.875063 -2827
 
 ## 1. Multithread + Loop Unrolling
 Total time to run simulation 2.375242 seconds, final location 4221.875063 -2827.830995
+
+## 3. Double Buffering + Inline Function
+Total time to run simulation 2.217423 seconds, final location 4220.770400 -2827.323041
+
