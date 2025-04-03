@@ -44,6 +44,7 @@ int nplanets;
 int timesteps;
 double dt;
 double G;
+std::thread threads[MAX_THREAD];
 
 void calculateD(const Planet* planets, Planet* nextplanets, int start, int end, int n) {
 	for (int i = start; i < end; i++){
@@ -106,21 +107,21 @@ void calculateD(const Planet* planets, Planet* nextplanets, int start, int end, 
 }
 
 inline void next(Planet* nextplanets, const Planet* planets) {
-	std::vector<std::thread> threads;
-
 	int width = nplanets / MAX_THREAD;
 	int extra_width = nplanets % MAX_THREAD;
 
 	int start = 0;
+	#pragma unroll(MAX_THREAD)
 	for (int i = 0; i < MAX_THREAD; i++) {
 		int end = start + width + (i < extra_width ? 1:0);
 
-		threads.emplace_back(calculateD, planets, nextplanets, start, end, nplanets);
+		threads[i] = std::thread(calculateD, planets, nextplanets, start, end, nplanets);
 		
 		start = end;
 	}
 
-	for (auto &t : threads) t.join();
+	#pragma unroll(MAX_THREAD)
+	for (int i = 0; i < MAX_THREAD; i++) threads[i].join();
 
    return;
 }
