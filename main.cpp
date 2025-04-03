@@ -106,10 +106,7 @@ void calculateD(const Planet* __restrict planets, Planet* __restrict nextplanets
     }
 }
 
-Planet* next(Planet* planets) {
-	Planet* nextplanets = (Planet*)malloc(sizeof(Planet) * nplanets);
-	std::memcpy(nextplanets, planets, sizeof(Planet) * nplanets);
-   
+inline void next(Planet* nextplanets, const Planet* planets) {
 	std::vector<std::thread> threads;
 
 	int width = nplanets / MAX_THREAD;
@@ -126,8 +123,7 @@ Planet* next(Planet* planets) {
 
 	for (auto &t : threads) t.join();
 
-   free(planets);
-   return nextplanets;
+   return;
 }
 
 int main(int argc, const char** argv){
@@ -152,10 +148,16 @@ int main(int argc, const char** argv){
 
    struct timeval start, end;
    gettimeofday(&start, NULL);
+   Planet* planets2 = (Planet*)malloc(sizeof(Planet) * nplanets);
    for (int i=0; i<timesteps; i++) {
-      //printf("x=%f y=%f vx=%f vy=%f\n", planets[nplanets-1].x, planets[nplanets-1].y, planets[nplanets-1].vx, planets[nplanets-1].vy);
-      planets = next(planets);
+      printf("x=%f y=%f vx=%f vy=%f\n", planets[nplanets-1].x, planets[nplanets-1].y, planets[nplanets-1].vx, planets[nplanets-1].vy);
+		if (i & 0x1) {
+			next(planets, planets2);
+		} else {
+      		next(planets2, planets);
+		}
    }
+	if (timesteps & 0x1) planets = planets2;
    gettimeofday(&end, NULL);
    printf("Total time to run simulation %0.6f seconds, final location %f %f\n", tdiff(&start, &end), planets[nplanets-1].x, planets[nplanets-1].y);
 
