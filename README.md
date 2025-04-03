@@ -35,3 +35,12 @@ In particular, consider speeding up simple run like the following (which runs ~6
 ```
 
 Exact bitwise reproducibility is not required, but approximate correctness (within a reasonable region of the final location).
+
+
+# Progress
+
+## 0. Baseline
+Total time to run simulation 11.407342 seconds, final location 4221.875063 -2827.830995
+
+## 1. Multithread + Loop Unrolling
+Total time to run simulation 2.375242 seconds, final location 4221.875063 -2827.830995
