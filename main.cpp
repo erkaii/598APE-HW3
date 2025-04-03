@@ -151,10 +151,11 @@ int main(int argc, const char** argv){
    Planet* planets2 = (Planet*)malloc(sizeof(Planet) * nplanets);
 	std::memcpy(planets2, planets, sizeof(Planet) * nplanets);
    for (int i=0; i<timesteps; i++) {
-      //printf("x=%f y=%f vx=%f vy=%f\n", planets[nplanets-1].x, planets[nplanets-1].y, planets[nplanets-1].vx, planets[nplanets-1].vy);
-		next(planets, planets2);
+        //printf("x=%f y=%f vx=%f vy=%f\n", planets[nplanets-1].x, planets[nplanets-1].y, planets[nplanets-1].vx, planets[nplanets-1].vy);
+		next(planets2, planets);
 		std::swap(planets, planets2);
    }
+   std::swap(planets, planets2);
    gettimeofday(&end, NULL);
    printf("Total time to run simulation %0.6f seconds, final location %f %f\n", tdiff(&start, &end), planets[nplanets-1].x, planets[nplanets-1].y);
 
