@@ -80,3 +80,7 @@ Install raylib system-wide (this is optional!!!),
 ```shell
 sudo make install
 ```
+
+A screenshot of the visualised simulation.
+
+![image.png](image.png)
