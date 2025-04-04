@@ -7,6 +7,7 @@
 #include <thread>
 #include <vector>
 #include <cstring>
+#include "raylib.h"
 
 #define MAX_THREAD 4
 
@@ -150,16 +151,38 @@ int main(int argc, const char** argv){
    gettimeofday(&start, NULL);
    Planet* planets2 = (Planet*)malloc(sizeof(Planet) * nplanets);
 	std::memcpy(planets2, planets, sizeof(Planet) * nplanets);
-   for (int i=0; i<timesteps; i++) {
-        //printf("x=%f y=%f vx=%f vy=%f\n", planets[nplanets-1].x, planets[nplanets-1].y, planets[nplanets-1].vx, planets[nplanets-1].vy);
-		next(planets2, planets);
-		std::swap(planets, planets2);
-   }
+
+	// === Initialize raylib window ===
+    const int screenWidth = 1000;
+    const int screenHeight = 1000;
+    InitWindow(screenWidth, screenHeight, "N-Body Simulation");
+    SetTargetFPS(60);
+
+	for (int t=0; t<timesteps && !WindowShouldClose(); t++) {
+        next(planets2, planets);
+        std::swap(planets, planets2);
+
+        BeginDrawing();
+        ClearBackground(BLACK);
+
+        // Draw all planets
+        for (int i = 0; i < nplanets; i++) {
+            // Map coordinates to screen space
+            float drawX = (float)(planets[i].x * 5 + screenWidth / 2);
+            float drawY = (float)(planets[i].y * 5 + screenHeight / 2);
+            DrawCircle(drawX, drawY, 2, WHITE);
+        }
+
+        DrawText(TextFormat("Step %d/%d", t+1, timesteps), 10, 10, 20, GREEN);
+        EndDrawing();
+    }
+
+
    std::swap(planets, planets2);
    gettimeofday(&end, NULL);
    printf("Total time to run simulation %0.6f seconds, final location %f %f\n", tdiff(&start, &end), planets[nplanets-1].x, planets[nplanets-1].y);
+	CloseWindow();
 	free(planets);
 	free(planets2);
-
    return 0;   
 }

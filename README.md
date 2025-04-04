@@ -48,3 +48,35 @@ Total time to run simulation 2.375242 seconds, final location 4221.875063 -2827.
 ## 3. Double Buffering + Inline Function
 Total time to run simulation 2.217423 seconds, final location 4220.770400 -2827.323041
 
+# Visualization
+Use ```raylib``` to visualize the simulation.
+
+## Build ```raylib```
+On ubuntu, install the following dependencies,
+
+```shell
+sudo apt install build-essential git
+sudo apt install libasound2-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxinerama-dev libwayland-dev libxkbcommon-dev
+```
+
+Clone source code,
+
+```shell
+git clone https://github.com/raysan5/raylib.git
+cd raylib
+```
+
+Build raylib,
+
+```shell
+mkdir build
+cd build
+cmake ..
+make -j4
+```
+
+Install raylib system-wide (this is optional!!!),
+
+```shell
+sudo make install
+```
