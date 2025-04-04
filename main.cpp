@@ -158,6 +158,8 @@ int main(int argc, const char** argv){
    std::swap(planets, planets2);
    gettimeofday(&end, NULL);
    printf("Total time to run simulation %0.6f seconds, final location %f %f\n", tdiff(&start, &end), planets[nplanets-1].x, planets[nplanets-1].y);
+	free(planets);
+	free(planets2);
 
    return 0;   
 }
