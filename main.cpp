@@ -153,8 +153,8 @@ int main(int argc, const char** argv){
 	std::memcpy(planets2, planets, sizeof(Planet) * nplanets);
 
 	// === Initialize raylib window ===
-    const int screenWidth = 2000;
-    const int screenHeight = 1200;
+    const int screenWidth = 1000;
+    const int screenHeight = 1000;
     InitWindow(screenWidth, screenHeight, "N-Body Simulation");
     SetTargetFPS(60);
 
@@ -168,8 +168,8 @@ int main(int argc, const char** argv){
         // Draw all planets
         for (int i = 0; i < nplanets; i++) {
             // Map coordinates to screen space
-            float drawX = (float)(planets[i].x + screenWidth / 2);
-            float drawY = (float)(planets[i].y + screenHeight / 2);
+            float drawX = (float)(planets[i].x * 5 + screenWidth / 2);
+            float drawY = (float)(planets[i].y * 5 + screenHeight / 2);
             DrawCircle(drawX, drawY, 2, WHITE);
         }
 
