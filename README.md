@@ -84,3 +84,9 @@ sudo make install
 A screenshot of the visualised simulation.
 
 ![image.png](image.png)
+
+On Mac, simply install raylib with
+
+```shell
+brew install raylib
+```
