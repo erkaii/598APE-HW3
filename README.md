@@ -51,6 +51,10 @@ Total time to run simulation 2.217423 seconds, final location 4220.770400 -2827.
 # Visualization
 Use ```raylib``` to visualize the simulation.
 
+A screenshot of the visualised simulation.
+
+![image.png](image.png)
+
 ## Build ```raylib```
 On ubuntu, install the following dependencies,
 
@@ -80,10 +84,6 @@ Install raylib system-wide (this is optional!!!),
 ```shell
 sudo make install
 ```
-
-A screenshot of the visualised simulation.
-
-![image.png](image.png)
 
 On Mac, simply install raylib with
 
